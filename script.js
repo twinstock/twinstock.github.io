@@ -650,6 +650,12 @@ class StockCalculator {
     
     // 포트폴리오 재계산
     recalculatePortfolio() {
+        // 기존 currentPrice를 저장
+        const savedCurrentPrices = new Map();
+        this.portfolio.forEach((stock, stockName) => {
+            savedCurrentPrices.set(stockName, stock.currentPrice);
+        });
+
         // 포트폴리오 초기화
         this.portfolio.clear();
         
@@ -658,6 +664,13 @@ class StockCalculator {
         
         sortedTransactions.forEach(transaction => {
             this.updatePortfolio(transaction.stockName, transaction.quantity, transaction.price, transaction.type);
+        });
+
+        // 저장된 currentPrice를 다시 적용
+        savedCurrentPrices.forEach((price, stockName) => {
+            if (this.portfolio.has(stockName)) {
+                this.portfolio.get(stockName).currentPrice = price;
+            }
         });
     }
 
