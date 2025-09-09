@@ -90,6 +90,14 @@ class StockCalculator {
         if (openHelpModalBtn) {
             openHelpModalBtn.addEventListener('click', () => this.openHelpModal());
         }
+
+        // 문의하기 버튼 이벤트 리스너
+        const contactUsBtn = document.getElementById('contactUsBtn');
+        if (contactUsBtn) {
+            contactUsBtn.addEventListener('click', () => {
+                window.location.href = 'mailto:qwerasdf5190@gmail.com';
+            });
+        }
     }
 
     openBulkTransactionModal() {
